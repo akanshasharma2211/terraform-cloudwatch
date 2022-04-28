@@ -19,7 +19,7 @@ value = "${data.aws_instances.test.instance_tags}"
 
 resource "aws_cloudwatch_metric_alarm" "instance_statuscheck" {
   for_each = "${toset(data.aws_instances.test.ids)}"
-  alarm_name          = each.key
+    alarm_name          = each.key
     comparison_operator = "GreaterThanOrEqualToThreshold"
     evaluation_periods  = "2"
     metric_name         = "StatusCheckFailed"
@@ -30,4 +30,6 @@ resource "aws_cloudwatch_metric_alarm" "instance_statuscheck" {
     alarm_description   = "EC2 Status Check"
 
     dimensions          = { InstanceId = each.key }
+    alarm_actions       =  "arn:aws:sns:ap-south-1:596567799196:test:4bfc0f99-5a97-4f89-8900-cbdd98da0f54"
+    in alarm_actions    = "arn:aws:sns:ap-south-1:596567799196:test:4bfc0f99-5a97-4f89-8900-cbdd98da0f54"
 }
